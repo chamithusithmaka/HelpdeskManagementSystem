@@ -1,0 +1,86 @@
+.admin-header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-logo h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.admin-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-notifications {
+  position: relative;
+  cursor: pointer;
+}
+
+.admin-notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #e74c3c;
+  color: white;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-user-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.admin-username {
+  font-weight: 500;
+}
+
+.admin-icon {
+  font-size: 18px;
+}
+
+.admin-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  min-width: 150px;
+  margin-top: 10px;
+  z-index: 10;
+  display: none;
+}
+
+.admin-user-menu:hover .admin-dropdown {
+  display: block;
+}
+
+.admin-dropdown-item {
+  padding: 10px 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-dropdown-item:hover {
+  background-color: #f5f7fa;
+}

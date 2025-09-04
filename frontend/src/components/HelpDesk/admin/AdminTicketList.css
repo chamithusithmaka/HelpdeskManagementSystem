@@ -1,0 +1,254 @@
+.admin-ticket-list-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.admin-ticket-controls {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-section-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+.admin-search {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.admin-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7f8c8d;
+}
+
+.admin-search-input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.admin-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-filter-icon {
+  color: #7f8c8d;
+}
+
+.admin-filter-select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 150px;
+}
+
+.admin-no-tickets {
+  padding: 30px;
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+.admin-ticket-table-container {
+  overflow-x: auto;
+}
+
+.admin-ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-ticket-table th {
+  background-color: #f8f9fa;
+  text-align: left;
+  padding: 12px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #34495e;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-ticket-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.admin-ticket-row:hover {
+  background-color: #f8f9fa;
+}
+
+.admin-ticket-id {
+  font-family: monospace;
+  font-weight: 600;
+}
+
+.admin-ticket-title {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-ticket-actions {
+  display: flex;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.admin-view-btn, .admin-assign-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.admin-view-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.admin-view-btn:hover {
+  background-color: #2980b9;
+}
+
+.admin-assign-btn {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.admin-assign-btn:hover {
+  background-color: #27ae60;
+}
+
+.admin-status-badge, .admin-priority-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.admin-status-open {
+  background-color: #f39c12;
+  color: white;
+}
+
+.admin-status-progress {
+  background-color: #3498db;
+  color: white;
+}
+
+.admin-status-resolved {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.admin-status-closed {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.admin-priority-low {
+  background-color: #3498db;
+  color: white;
+}
+
+.admin-priority-medium {
+  background-color: #f39c12;
+  color: white;
+}
+
+.admin-priority-high {
+  background-color: #e67e22;
+  color: white;
+}
+
+.admin-priority-critical {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Add these new styles for PDF generation */
+.admin-ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-pdf-controls {
+  display: flex;
+  align-items: center;
+}
+
+.admin-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.admin-pdf-btn:hover {
+  background-color: #c0392b;
+}
+
+.admin-spinner-icon {
+  animation: admin-spin 1s linear infinite;
+}
+
+@keyframes admin-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .admin-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .admin-filter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .admin-filter-select {
+    width: 100%;
+  }
+}
