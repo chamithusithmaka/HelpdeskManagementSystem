@@ -7,7 +7,7 @@ const app = express();
 const PORT = 5000;
 
 // MongoDB Connection
-const MONGO_URI = 'mongodb+srv://sithmaka:sithmaka1122@cluster.pvqvoqf.mongodb.net/Order_DB?retryWrites=true&w=majority&appName=Cluster';
+const MONGO_URI = 'mongodb+srv://sewmisenarath:ABRYtb9IgFBhHvNB@cluster0.e2w4drx.mongodb.net/restaurantMgt?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB connected successfully'))
