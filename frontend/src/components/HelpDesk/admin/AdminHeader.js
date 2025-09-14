@@ -6,7 +6,7 @@ const AdminHeader = () => {
   return (
     <header className="admin-header">
       <div className="admin-logo">
-        <h1>Helpdesk Admin</h1>
+        <h1>Support System Admin</h1>
       </div>
       <div className="admin-header-controls">
         
