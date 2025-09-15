@@ -322,12 +322,12 @@ exports.deleteTicket = async (req, res) => {
     }
 
     // Only allow deletion if ticket is open
-    if (ticket.status !== 'Open') {
-      return res.status(403).json({
-        success: false,
-        message: 'Only open tickets can be deleted'
-      });
-    }
+    if (ticket.status !== 'Open' && ticket.status !== 'Closed') {
+  return res.status(403).json({
+    success: false,
+    message: 'Only open or closed tickets can be deleted'
+  });
+}
 
     await Ticket.findByIdAndDelete(req.params.id);
 

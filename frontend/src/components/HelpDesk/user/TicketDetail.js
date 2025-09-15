@@ -131,7 +131,7 @@ const TicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
 
   // Check if ticket can be updated or deleted based on status
   const isTicketUpdatable = ticket.status === 'Open';
-  const isTicketDeletable = true; // All tickets can be deleted regardless of status
+  const isTicketDeletable = ticket.status === 'Open' || ticket.status === 'Closed'; // Only Open or Closed
   const formattedDate = new Date(ticket.createdAt).toLocaleString();
   
   // Get the message based on ticket status
@@ -313,11 +313,16 @@ const TicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
                     <FaLock /> Cannot Edit
                   </button>
                 )}
-                
-                {/* Show delete button for all tickets regardless of status */}
+
+                {/* Delete button: enabled only if Open or Closed */}
                 <button 
                   className="ticket-delete-btn"
-                  onClick={() => setDeleteConfirm(true)}
+                  onClick={() => {
+                    if (isTicketDeletable) setDeleteConfirm(true);
+                  }}
+                  disabled={!isTicketDeletable}
+                  title={isTicketDeletable ? "Delete this ticket" : "You can only delete tickets that are Open or Closed"}
+                  style={{ pointerEvents: !isTicketDeletable ? 'none' : 'auto', opacity: !isTicketDeletable ? 0.6 : 1 }}
                 >
                   <FaTrash /> Delete Ticket
                 </button>
