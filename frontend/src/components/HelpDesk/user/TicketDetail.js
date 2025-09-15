@@ -43,9 +43,16 @@ const TicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let filteredValue = value;
+
+    if (name === 'title') {
+      // Allow only letters, numbers, and spaces
+      filteredValue = value.replace(/[^a-zA-Z0-9 ]/g, '');
+    }
+
     setEditFormData({
       ...editFormData,
-      [name]: value
+      [name]: filteredValue
     });
   };
 
@@ -184,6 +191,8 @@ const TicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
                 onChange={handleInputChange}
                 className="ticket-form-input"
                 required
+                pattern="[A-Za-z0-9 ]+"
+                title="Only letters, numbers, and spaces allowed"
               />
             </div>
             

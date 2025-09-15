@@ -17,9 +17,21 @@ const TicketCreateForm = ({ onClose, onTicketCreated }) => {
   const [formSuccess, setFormSuccess] = useState(false);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    let filteredValue = value;
+
+    if (name === 'studentId') {
+      // Allow only letters and numbers
+      filteredValue = value.replace(/[^a-zA-Z0-9]/g, '');
+    }
+    if (name === 'title') {
+      // Allow only letters, numbers, and spaces
+      filteredValue = value.replace(/[^a-zA-Z0-9 ]/g, '');
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: filteredValue
     });
   };
 
@@ -91,6 +103,8 @@ const TicketCreateForm = ({ onClose, onTicketCreated }) => {
                 onChange={handleChange}
                 required
                 placeholder="Enter your student ID"
+                pattern="[A-Za-z0-9]+"
+                title="Only letters and numbers allowed"
               />
             </div>
             
@@ -107,6 +121,8 @@ const TicketCreateForm = ({ onClose, onTicketCreated }) => {
                 required
                 maxLength="100"
                 placeholder="Brief title describing your issue"
+                pattern="[A-Za-z0-9 ]+"
+                title="Only letters, numbers, and spaces allowed"
               />
             </div>
             
