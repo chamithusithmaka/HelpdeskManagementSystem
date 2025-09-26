@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import AdminHeader from '../HelpDesk/admin/AdminHeader';
-import AdminSidebar from '../HelpDesk/admin/AdminSidebar';
-import Footer from '../Common/Footer';
+import AdminHeader from '../../HelpDesk/admin/AdminHeader';
+import AdminSidebar from '../../HelpDesk/admin/AdminSidebar';
+import Footer from '../../Common/Footer';
 import './AdminUsers.css';
 
 const AdminUserDetail = () => {

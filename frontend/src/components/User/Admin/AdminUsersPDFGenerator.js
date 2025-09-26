@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaFilePdf, FaSpinner } from 'react-icons/fa';
 import jsPDF from 'jspdf';
-import '../HelpDesk/admin/AdminPDFGenerator.css';
+import '../../HelpDesk/admin/AdminPDFGenerator.css';
 
 const AdminUsersPDFGenerator = ({ users }) => {
   const [generatingPDF, setGeneratingPDF] = useState(false);

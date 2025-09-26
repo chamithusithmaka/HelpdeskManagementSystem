@@ -15,8 +15,8 @@ import Profile from './components/User/Profile';
 import AdminTicketList from './components/HelpDesk/admin/AdminTicketList';
 import AdminTicketDetail from './components/HelpDesk/admin/AdminTicketDetail';
 // Add imports
-import AdminUsers from './components/Admin/AdminUsers';
-import AdminUserDetail from './components/Admin/AdminUserDetail';
+import AdminUsers from './components/User/Admin/AdminUsers';
+import AdminUserDetail from './components/User/Admin/AdminUserDetail';
 
 function App() {
   return (

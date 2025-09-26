@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AdminHeader from '../HelpDesk/admin/AdminHeader';
-import AdminSidebar from '../HelpDesk/admin/AdminSidebar';
-import Footer from '../Common/Footer';
+import AdminHeader from '../../HelpDesk/admin/AdminHeader';
+import AdminSidebar from '../../HelpDesk/admin/AdminSidebar';
+import Footer from '../../Common/Footer';
 import AdminUsersPDFGenerator from './AdminUsersPDFGenerator';
 import { FaSearch, FaFilter } from 'react-icons/fa';
 import './AdminUsers.css';
