@@ -1,0 +1,395 @@
+.book-dashboard-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.booklist-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
+}
+
+.booklist-title {
+  color: #2c3e50;
+  margin: 0 0 24px 0;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.booklist-title-icon {
+  margin-right: 12px;
+  color: #fff;
+  vertical-align: middle;
+}
+
+.booklist-loading,
+.booklist-error,
+.booklist-empty {
+  text-align: center;
+  padding: 24px;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.booklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.book-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-card-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 12px;
+}
+
+.book-card-body {
+  margin-bottom: 16px;
+  color: #2c3e50;
+}
+
+.book-card-label {
+  font-weight: 500;
+  color: #3498db;
+  margin-right: 6px;
+}
+
+.book-card-cart-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.book-card-cart-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.book-card-cart-btn:hover:not(:disabled) {
+  background: #2980b9;
+}
+
+.booklist-cart-summary {
+  margin-top: 32px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
+}
+
+.booklist-cart-summary h3 {
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+.booklist-cart-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.booklist-cart-summary li {
+  padding: 6px 0;
+  color: #34495e;
+  font-size: 1rem;
+}
+
+/* Add these styles to your existing BookList.css */
+
+.book-dashboard-flex {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  gap: 32px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.book-dashboard-main {
+  flex: 2;
+  padding: 20px 0;
+  min-width: 0;
+}
+
+.booklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.booklist-cart-sidebar {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  padding: 28px 24px 24px 24px;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
+  min-width: 320px;
+  max-width: 370px;
+  margin-top: 48px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.booklist-cart-sidebar h3 {
+  margin-bottom: 16px;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.booklist-cart-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  width: 100%;
+}
+
+.booklist-cart-sidebar li {
+  padding: 8px 0;
+  color: #34495e;
+  font-size: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.booklist-cart-empty {
+  color: #7f8c8d;
+  font-size: 1rem;
+  padding: 12px 0;
+  text-align: center;
+}
+
+.booklist-order-summary {
+  margin-top: 12px;
+  padding: 12px 0 0 0;
+  border-top: 1px solid #eee;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #2c3e50;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.order-summary-icon {
+  color: #3498db;
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+}
+
+.cart-payment-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 14px 10px;
+}
+
+.cart-payment-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 0;
+}
+
+.cart-payment-icon {
+  margin-right: 6px;
+  color: #3498db;
+}
+
+.cart-payment-row {
+  display: flex;
+  gap: 12px;
+}
+
+.cart-payment-field input {
+  padding: 8px 10px;
+  border: 1px solid #dbe2e8;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+.cart-payment-field input:focus {
+  border: 1.5px solid #3498db;
+}
+
+.cart-payment-field label {
+  font-size: 0.97rem;
+  color: #34495e;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.cart-place-order-btn {
+  margin-top: 8px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+  letter-spacing: 0.5px;
+}
+
+.cart-place-order-btn:hover {
+  background: #219150;
+}
+
+.cart-order-msg {
+  margin-top: 8px;
+  color: #e74c3c;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.cart-clear-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+.cart-clear-btn:hover {
+  background: #c0392b;
+}
+.myorders-btn {
+  background: #fff;
+  color: #2980b9;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+.myorders-btn:hover {
+  background: #3498db;
+  color: #fff;
+}
+
+.booklist-bg {
+  min-height: 100vh;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.booklist-header {
+  background: #2980b9;
+  color: white;
+  padding: 24px 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.booklist-main {
+  flex: 1;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booklist-footer {
+  background: #ecf0f1;
+  color: #34495e;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 1rem;
+  margin-top: auto;
+}
+
+/* Responsive: stack sidebar below on small screens */
+@media (max-width: 900px) {
+  .booklist-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 1.3rem;
+  }
+  .booklist-main {
+    padding: 16px 4px;
+  }
+  .book-dashboard-flex {
+    flex-direction: column;
+    gap: 0;
+  }
+  .booklist-cart-sidebar {
+    margin-top: 24px;
+    max-width: 100%;
+    width: 100%;
+  }
+  .booklist-grid {
+    grid-template-columns: 1fr;
+  }
+}

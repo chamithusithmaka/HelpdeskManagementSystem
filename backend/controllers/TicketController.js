@@ -39,14 +39,14 @@ exports.createTicket = async (req, res) => {
 // Get all tickets with optional filtering
 exports.getAllTickets = async (req, res) => {
   try {
-    const { status, priority, isArchived } = req.query;
+    const { status, priority, isArchived, uni_id } = req.query;
     
     // Build filter object based on query parameters
     const filter = {};
     if (status) filter.status = status;
     if (priority) filter.priority = priority;
     if (isArchived !== undefined) filter.isArchived = isArchived === 'true';
-
+ if (uni_id) filter.studentId = uni_id;
     const tickets = await Ticket.find(filter).sort({ createdAt: -1 });
 
     res.status(200).json({

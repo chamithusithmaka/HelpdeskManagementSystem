@@ -1,0 +1,138 @@
+.profile-bg {
+  min-height: 100vh;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-container {
+  max-width: 400px;
+  margin: 48px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-container-wide {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+  padding: 36px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.profile-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-form label {
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 4px;
+  margin-top: 8px;
+  font-size: 1.04rem;
+}
+
+.profile-form input,
+.profile-form select {
+  padding: 12px;
+  border: 1.5px solid #dbe2e8;
+  border-radius: 6px;
+  font-size: 1.08rem;
+  background: #f8fafc;
+  transition: border 0.2s;
+}
+
+.profile-form input:focus,
+.profile-form select:focus {
+  border: 1.5px solid #2980b9;
+  outline: none;
+  background: #f0f6fa;
+}
+
+.profile-form button,
+.profile-form .profile-form-button {
+  background: #2980b9;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.profile-form button:hover,
+.profile-form .profile-form-button:hover {
+  background: #1c5d99;
+}
+
+.profile-delete-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 18px;
+  margin-bottom: 0;
+  transition: background 0.2s;
+}
+
+.profile-delete-btn:hover {
+  background: #c0392b;
+}
+
+.profile-form .profile-form-button {
+  background: #f39c12;
+  color: #fff;
+  margin-top: 12px;
+}
+
+.profile-form .profile-form-button:hover {
+  background: #d35400;
+}
+
+.profile-success {
+  color: #27ae60;
+  margin-top: 14px;
+  font-size: 1.04rem;
+  text-align: center;
+}
+
+.profile-error {
+  color: #e74c3c;
+  margin-top: 14px;
+  font-size: 1.04rem;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .profile-container-wide {
+    max-width: 98vw;
+    padding: 18px 6vw;
+    border-radius: 8px;
+  }
+  .profile-form input,
+  .profile-form select {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}

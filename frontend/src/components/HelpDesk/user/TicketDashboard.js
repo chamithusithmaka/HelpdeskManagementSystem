@@ -6,6 +6,7 @@ import TicketCreateForm from './TicketCreateForm';
 import TicketDetail from './TicketDetail';
 import TicketHeader from './TicketHeader';
 import TicketFooter from './TicketFooter';
+import Header from '../../Common/Header'; // <-- Import Header
 import './TicketDashboard.css';
 
 const TicketDashboard = () => {
@@ -16,6 +17,9 @@ const TicketDashboard = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [statusFilter, setStatusFilter] = useState('all');
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userUniId = user ? user.uni_id : null;
+
   // Fetch tickets
   useEffect(() => {
     fetchTickets();
@@ -24,16 +28,14 @@ const TicketDashboard = () => {
   const fetchTickets = async () => {
     setIsLoading(true);
     try {
-      let url = 'http://localhost:5000/api/tickets';
+      let url = `http://localhost:5000/api/tickets?uni_id=${userUniId}`;
       if (statusFilter !== 'all') {
-        url += `?status=${statusFilter}`;
+        url += `&status=${statusFilter}`;
       }
-      
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      
       const data = await response.json();
       setTickets(data.data);
       setIsLoading(false);
@@ -55,9 +57,22 @@ const TicketDashboard = () => {
     // Implementation of delete functionality
   };
 
+  if (!userUniId) {
+    return (
+      <div className="ticket-container">
+        <Header />
+        <div className="ticket-dashboard-container" style={{textAlign:'center', marginTop:'60px'}}>
+          <h2>You need to login to see your tickets.</h2>
+        </div>
+        <TicketFooter />
+      </div>
+    );
+  }
+
   return (
     <div className="ticket-container">
-      <TicketHeader />
+      <Header /> {/* Add your main header at the very top */}
+      
       
       <div className="ticket-dashboard-container">
         <DashboardHeader 

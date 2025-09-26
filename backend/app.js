@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
+require('dotenv').config();
 
 const app = express();
 const PORT = 5000;
@@ -21,9 +22,14 @@ app.use(morgan('dev'));
 
 // Import routes
 const ticketRoutes = require('./routes/ticketRoutes');
-
+const orderRoutes = require('./routes/OrderRoutes');
+const UserRoute = require('./routes/UserRoute');
 // Routes
 app.use('/api/tickets', ticketRoutes);
+app.use('/api/orders', orderRoutes);
+app.use("/users",UserRoute);
+
+
 
 // Root route
 app.get('/', (req, res) => {
@@ -44,4 +50,4 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-module.exports = app;
+module.exports = { app };

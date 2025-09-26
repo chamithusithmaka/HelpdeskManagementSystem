@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom'; // already imported useParams
 import { 
   FaUser, FaListAlt, FaCalendarAlt, FaTag, FaExclamationTriangle,
   FaCheck, FaPaperPlane, FaTimes, FaUserPlus, FaSpinner
 } from 'react-icons/fa';
 import { MdDescription } from 'react-icons/md';
+import AdminHeader from './AdminHeader';
+import AdminSidebar from './AdminSidebar';
 import './AdminTicketDetail.css';
 
-const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
+const AdminTicketDetail = () => {
+  const { id } = useParams();
+  const navigate = useNavigate(); // Add this
   const [ticket, setTicket] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,15 +21,16 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
   const [responseLoading, setResponseLoading] = useState(false);
   const [statusLoading, setStatusLoading] = useState(false);
   const [assignLoading, setAssignLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('tickets');
 
   useEffect(() => {
     fetchTicketDetails();
-  }, [ticketId]);
+  }, [id]); // <-- Use id from URL
 
   const fetchTicketDetails = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/tickets/${ticketId}`);
+      const response = await fetch(`http://localhost:5000/api/tickets/${id}`); // <-- Use id here
       
       if (!response.ok) {
         throw new Error('Failed to fetch ticket details');
@@ -53,7 +59,7 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
         message: response
       };
 
-      const resp = await fetch(`http://localhost:5000/api/tickets/${ticketId}/responses`, {
+      const resp = await fetch(`http://localhost:5000/api/tickets/${id}/responses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +74,7 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
       const data = await resp.json();
       setTicket(data.data);
       setResponse('');
-      onTicketUpdated();
+      // onTicketUpdated(); // <-- This function is no longer passed as a prop
     } catch (err) {
       setError(err.message);
     } finally {
@@ -81,7 +87,7 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
 
     try {
       setStatusLoading(true);
-      const resp = await fetch(`http://localhost:5000/api/tickets/${ticketId}/status`, {
+      const resp = await fetch(`http://localhost:5000/api/tickets/${id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +101,7 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
 
       const data = await resp.json();
       setTicket(data.data);
-      onTicketUpdated();
+      // onTicketUpdated(); // <-- This function is no longer passed as a prop
     } catch (err) {
       setError(err.message);
     } finally {
@@ -109,7 +115,7 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
 
     try {
       setAssignLoading(true);
-      const resp = await fetch(`http://localhost:5000/api/tickets/${ticketId}/assign`, {
+      const resp = await fetch(`http://localhost:5000/api/tickets/${id}/assign`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +130,7 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
       const data = await resp.json();
       setTicket(data.data);
       setAssignTo('');
-      onTicketUpdated();
+      // onTicketUpdated(); // <-- This function is no longer passed as a prop
     } catch (err) {
       setError(err.message);
     } finally {
@@ -159,7 +165,7 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
       <div className="admin-detail-error">
         <FaExclamationTriangle className="admin-detail-error-icon" />
         <p>{error}</p>
-        <button className="admin-btn" onClick={onClose}>Go Back</button>
+        <button className="admin-btn" onClick={() => navigate('/admin/tickets')}>Go Back</button>
       </div>
     );
   }
@@ -177,191 +183,199 @@ const AdminTicketDetail = ({ ticketId, onClose, onTicketUpdated }) => {
   };
 
   return (
-    <div className="admin-ticket-detail">
-      <div className="admin-detail-header">
-        <div className="admin-detail-header-left">
-          <h2>Ticket #{ticket._id.slice(-6).toUpperCase()}</h2>
-          <span className={`admin-status-badge ${getStatusClass(ticket.status)}`}>
-            {ticket.status}
-          </span>
-        </div>
-        <button className="admin-close-btn" onClick={onClose}>
-          <FaTimes />
-        </button>
-      </div>
-
-      <div className="admin-detail-content">
-        <div className="admin-detail-main">
-          <div className="admin-detail-title">{ticket.title}</div>
-          
-          <div className="admin-detail-meta">
-            <div className="admin-detail-meta-item">
-              <FaUser className="admin-detail-icon" />
-              <span className="admin-detail-label">Student ID:</span>
-              <span className="admin-detail-value">{ticket.studentId}</span>
-            </div>
-            
-            <div className="admin-detail-meta-item">
-              <FaListAlt className="admin-detail-icon" />
-              <span className="admin-detail-label">Issue Type:</span>
-              <span className="admin-detail-value">{ticket.issueType}</span>
-            </div>
-            
-            <div className="admin-detail-meta-item">
-              <FaCalendarAlt className="admin-detail-icon" />
-              <span className="admin-detail-label">Created:</span>
-              <span className="admin-detail-value">{new Date(ticket.createdAt).toLocaleString()}</span>
-            </div>
-            
-            <div className="admin-detail-meta-item">
-              <FaTag className="admin-detail-icon" />
-              <span className="admin-detail-label">Priority:</span>
-              <span className={`admin-detail-value admin-priority-${ticket.priority.toLowerCase()}`}>
-                {ticket.priority}
-              </span>
-            </div>
-
-            <div className="admin-detail-meta-item">
-              <FaUserPlus className="admin-detail-icon" />
-              <span className="admin-detail-label">Assigned To:</span>
-              <span className="admin-detail-value">
-                {ticket.assignedTo || 'Not assigned'}
-              </span>
-            </div>
-          </div>
-          
-          <div className="admin-detail-description">
-            <h3>
-              <MdDescription className="admin-detail-icon" /> Description
-            </h3>
-            <p>{ticket.description}</p>
-          </div>
-          
-          <div className="admin-detail-responses">
-            <h3>Responses ({ticket.responses ? ticket.responses.length : 0})</h3>
-            
-            {ticket.responses && ticket.responses.length > 0 ? (
-              <div className="admin-responses-list">
-                {ticket.responses.map((resp, index) => (
-                  <div key={index} className="admin-response-item">
-                    <div className="admin-response-header">
-                      <span className="admin-response-author">{resp.responder}</span>
-                      <span className="admin-response-time">
-                        {new Date(resp.createdAt).toLocaleString()}
-                      </span>
-                    </div>
-                    <div className="admin-response-body">{resp.message}</div>
-                  </div>
-                ))}
+    <div>
+      <AdminHeader />
+      <div style={{ display: 'flex', minHeight: 'calc(100vh - 60px)' }}>
+        <AdminSidebar activeTab={activeTab} onTabChange={setActiveTab} />
+        <div style={{ flex: 1 }}>
+          <div className="admin-ticket-detail">
+            <div className="admin-detail-header">
+              <div className="admin-detail-header-left">
+                <h2>Ticket #{ticket._id.slice(-6).toUpperCase()}</h2>
+                <span className={`admin-status-badge ${getStatusClass(ticket.status)}`}>
+                  {ticket.status}
+                </span>
               </div>
-            ) : (
-              <div className="admin-no-responses">No responses yet</div>
-            )}
-            
-            <form className="admin-response-form" onSubmit={handleAddResponse}>
-              <h4>Add Response</h4>
-              <textarea
-                className="admin-response-textarea"
-                placeholder="Type your response here..."
-                value={response}
-                onChange={(e) => setResponse(e.target.value)}
-                required
-              />
-              <button 
-                type="submit" 
-                className="admin-btn admin-btn-primary"
-                disabled={responseLoading}
-              >
-                {responseLoading ? (
-                  <><FaSpinner className="admin-spinner-icon" /> Sending...</>
-                ) : (
-                  <><FaPaperPlane /> Send Response</>
-                )}
+              <button className="admin-close-btn" onClick={() => navigate('/admin/tickets')}>
+                <FaTimes />
               </button>
-            </form>
-          </div>
-        </div>
-        
-        <div className="admin-detail-sidebar">
-          <div className="admin-detail-actions">
-            <div className="admin-action-card">
-              <h4>Update Status</h4>
-              <form onSubmit={handleUpdateStatus}>
-                <select
-                  className="admin-select"
-                  value={statusUpdate}
-                  onChange={(e) => setStatusUpdate(e.target.value)}
-                  required
-                >
-                  <option value="Open">Open</option>
-                  <option value="In Progress">In Progress</option>
-                  <option value="Resolved">Resolved</option>
-                  <option value="Closed">Closed</option>
-                </select>
-                <button 
-                  type="submit" 
-                  className="admin-btn admin-btn-primary"
-                  disabled={statusLoading}
-                >
-                  {statusLoading ? (
-                    <><FaSpinner className="admin-spinner-icon" /> Updating...</>
-                  ) : (
-                    <><FaCheck /> Update Status</>
-                  )}
-                </button>
-              </form>
             </div>
-            
-            <div className="admin-action-card">
-              <h4>Assign Ticket</h4>
-              <form onSubmit={handleAssignTicket}>
-                <input
-                  type="text"
-                  className="admin-input"
-                  placeholder="Enter agent name (letters only)"
-                  value={assignTo}
-                  onChange={handleAssignInputChange}
-                  pattern="[A-Za-z\s]+"
-                  title="Please enter only letters and spaces"
-                  required
-                />
-                <div className="admin-input-hint">
-                  Only letters and spaces are allowed
+
+            <div className="admin-detail-content">
+              <div className="admin-detail-main">
+                <div className="admin-detail-title">{ticket.title}</div>
+                
+                <div className="admin-detail-meta">
+                  <div className="admin-detail-meta-item">
+                    <FaUser className="admin-detail-icon" />
+                    <span className="admin-detail-label">Student ID:</span>
+                    <span className="admin-detail-value">{ticket.studentId}</span>
+                  </div>
+                  
+                  <div className="admin-detail-meta-item">
+                    <FaListAlt className="admin-detail-icon" />
+                    <span className="admin-detail-label">Issue Type:</span>
+                    <span className="admin-detail-value">{ticket.issueType}</span>
+                  </div>
+                  
+                  <div className="admin-detail-meta-item">
+                    <FaCalendarAlt className="admin-detail-icon" />
+                    <span className="admin-detail-label">Created:</span>
+                    <span className="admin-detail-value">{new Date(ticket.createdAt).toLocaleString()}</span>
+                  </div>
+                  
+                  <div className="admin-detail-meta-item">
+                    <FaTag className="admin-detail-icon" />
+                    <span className="admin-detail-label">Priority:</span>
+                    <span className={`admin-detail-value admin-priority-${ticket.priority.toLowerCase()}`}>
+                      {ticket.priority}
+                    </span>
+                  </div>
+
+                  <div className="admin-detail-meta-item">
+                    <FaUserPlus className="admin-detail-icon" />
+                    <span className="admin-detail-label">Assigned To:</span>
+                    <span className="admin-detail-value">
+                      {ticket.assignedTo || 'Not assigned'}
+                    </span>
+                  </div>
                 </div>
-                <button 
-                  type="submit" 
-                  className="admin-btn admin-btn-primary"
-                  disabled={assignLoading || !assignTo.trim()}
-                >
-                  {assignLoading ? (
-                    <><FaSpinner className="admin-spinner-icon" /> Assigning...</>
+                
+                <div className="admin-detail-description">
+                  <h3>
+                    <MdDescription className="admin-detail-icon" /> Description
+                  </h3>
+                  <p>{ticket.description}</p>
+                </div>
+                
+                <div className="admin-detail-responses">
+                  <h3>Responses ({ticket.responses ? ticket.responses.length : 0})</h3>
+                  
+                  {ticket.responses && ticket.responses.length > 0 ? (
+                    <div className="admin-responses-list">
+                      {ticket.responses.map((resp, index) => (
+                        <div key={index} className="admin-response-item">
+                          <div className="admin-response-header">
+                            <span className="admin-response-author">{resp.responder}</span>
+                            <span className="admin-response-time">
+                              {new Date(resp.createdAt).toLocaleString()}
+                            </span>
+                          </div>
+                          <div className="admin-response-body">{resp.message}</div>
+                        </div>
+                      ))}
+                    </div>
                   ) : (
-                    <><FaUserPlus /> Assign Ticket</>
+                    <div className="admin-no-responses">No responses yet</div>
                   )}
-                </button>
-              </form>
-            </div>
-          </div>
-          
-          <div className="admin-ticket-timeline">
-            <h4>Ticket Timeline</h4>
-            <div className="admin-timeline-item">
-              <div className="admin-timeline-point"></div>
-              <div className="admin-timeline-content">
-                <div className="admin-timeline-title">Ticket Created</div>
-                <div className="admin-timeline-time">{new Date(ticket.createdAt).toLocaleString()}</div>
+                  
+                  <form className="admin-response-form" onSubmit={handleAddResponse}>
+                    <h4>Add Response</h4>
+                    <textarea
+                      className="admin-response-textarea"
+                      placeholder="Type your response here..."
+                      value={response}
+                      onChange={(e) => setResponse(e.target.value)}
+                      required
+                    />
+                    <button 
+                      type="submit" 
+                      className="admin-btn admin-btn-primary"
+                      disabled={responseLoading}
+                    >
+                      {responseLoading ? (
+                        <><FaSpinner className="admin-spinner-icon" /> Sending...</>
+                      ) : (
+                        <><FaPaperPlane /> Send Response</>
+                      )}
+                    </button>
+                  </form>
+                </div>
+              </div>
+              
+              <div className="admin-detail-sidebar">
+                <div className="admin-detail-actions">
+                  <div className="admin-action-card">
+                    <h4>Update Status</h4>
+                    <form onSubmit={handleUpdateStatus}>
+                      <select
+                        className="admin-select"
+                        value={statusUpdate}
+                        onChange={(e) => setStatusUpdate(e.target.value)}
+                        required
+                      >
+                        <option value="Open">Open</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Closed">Closed</option>
+                      </select>
+                      <button 
+                        type="submit" 
+                        className="admin-btn admin-btn-primary"
+                        disabled={statusLoading}
+                      >
+                        {statusLoading ? (
+                          <><FaSpinner className="admin-spinner-icon" /> Updating...</>
+                        ) : (
+                          <><FaCheck /> Update Status</>
+                        )}
+                      </button>
+                    </form>
+                  </div>
+                  
+                  <div className="admin-action-card">
+                    <h4>Assign Ticket</h4>
+                    <form onSubmit={handleAssignTicket}>
+                      <input
+                        type="text"
+                        className="admin-input"
+                        placeholder="Enter agent name (letters only)"
+                        value={assignTo}
+                        onChange={handleAssignInputChange}
+                        pattern="[A-Za-z\s]+"
+                        title="Please enter only letters and spaces"
+                        required
+                      />
+                      <div className="admin-input-hint">
+                        Only letters and spaces are allowed
+                      </div>
+                      <button 
+                        type="submit" 
+                        className="admin-btn admin-btn-primary"
+                        disabled={assignLoading || !assignTo.trim()}
+                      >
+                        {assignLoading ? (
+                          <><FaSpinner className="admin-spinner-icon" /> Assigning...</>
+                        ) : (
+                          <><FaUserPlus /> Assign Ticket</>
+                        )}
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                
+                <div className="admin-ticket-timeline">
+                  <h4>Ticket Timeline</h4>
+                  <div className="admin-timeline-item">
+                    <div className="admin-timeline-point"></div>
+                    <div className="admin-timeline-content">
+                      <div className="admin-timeline-title">Ticket Created</div>
+                      <div className="admin-timeline-time">{new Date(ticket.createdAt).toLocaleString()}</div>
+                    </div>
+                  </div>
+                  
+                  {ticket.responses && ticket.responses.map((resp, index) => (
+                    <div key={index} className="admin-timeline-item">
+                      <div className="admin-timeline-point"></div>
+                      <div className="admin-timeline-content">
+                        <div className="admin-timeline-title">Response Added</div>
+                        <div className="admin-timeline-time">{new Date(resp.createdAt).toLocaleString()}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-            
-            {ticket.responses && ticket.responses.map((resp, index) => (
-              <div key={index} className="admin-timeline-item">
-                <div className="admin-timeline-point"></div>
-                <div className="admin-timeline-content">
-                  <div className="admin-timeline-title">Response Added</div>
-                  <div className="admin-timeline-time">{new Date(resp.createdAt).toLocaleString()}</div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

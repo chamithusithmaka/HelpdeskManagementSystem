@@ -23,7 +23,7 @@
   background-color: #f0f4f8;
   padding: 16px 24px;
   border-radius: 8px;
-  width: 100%;
+  
 }
 
 .ticket-dashboard-title {
@@ -31,7 +31,17 @@
   margin: 0;
   font-size: 22px;
   display: flex;
-  align-items: center;
+  align-items: center; /* Already present, good! */
+  gap: 10px;           /* Add spacing between icon and text */
+}
+
+.ticket-icon {
+  font-size: 1.4em;
+  margin-right: 8px;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+  top: 2px; /* Adjust this value for perfect vertical alignment */
 }
 
 .ticket-create-btn {

@@ -1,0 +1,23 @@
+.home-bg {
+  min-height: 100vh;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0;
+}
+.home-main h1 {
+  font-size: 2.5rem;
+  color: #2980b9;
+  margin-bottom: 18px;
+}
+.home-main p {
+  font-size: 1.2rem;
+  color: #34495e;
+}

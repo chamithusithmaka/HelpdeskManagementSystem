@@ -1,0 +1,32 @@
+.admin-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.admin-pdf-btn:hover {
+  background-color: #c0392b;
+}
+
+.admin-pdf-btn:disabled {
+  background-color: #e6a8a3;
+  cursor: not-allowed;
+}
+
+.admin-spinner-icon {
+  animation: admin-pdf-spin 1s linear infinite;
+}
+
+@keyframes admin-pdf-spin {
+  to { transform: rotate(360deg); }
+}

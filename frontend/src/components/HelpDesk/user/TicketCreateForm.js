@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUser, FaRegClipboard, FaList, FaFlag } from 'react-icons/fa';
 import { MdDescription, MdCheckCircle, MdError } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
@@ -15,6 +15,14 @@ const TicketCreateForm = ({ onClose, onTicketCreated }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState(null);
   const [formSuccess, setFormSuccess] = useState(false);
+
+  // Auto-fill studentId from localStorage on mount
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.uni_id) {
+      setFormData(prev => ({ ...prev, studentId: user.uni_id }));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,6 +113,7 @@ const TicketCreateForm = ({ onClose, onTicketCreated }) => {
                 placeholder="Enter your student ID"
                 pattern="[A-Za-z0-9]+"
                 title="Only letters and numbers allowed"
+                readOnly
               />
             </div>
             
